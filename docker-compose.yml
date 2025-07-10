@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: mern-backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - MONGO_URI=mongodb+srv://harshitgahlawat2004:R3pjBNOhTCte47I4@cluster1.imkkabc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1
+    depends_on:
+      - mongo
+    command: npm start
+
+  mongo:
+    image: mongo:latest
+    container_name: mern-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
